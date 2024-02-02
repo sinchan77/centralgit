@@ -1,4 +1,4 @@
-name: Push-to-Ekk
+name: Push-to-EC2
 
 # Trigger deployment only on push to mamster branch
 on:
@@ -17,4 +17,8 @@ jobs:
 
       - name: Deploy to Server 1
         uses: easingthemes/ssh-deploy@main
-
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
